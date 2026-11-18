@@ -1,0 +1,221 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated user profile and role assignment for E-Ujian SMPN 1 Banding Agung.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Firebase Auth UID." },
+        "fullName": { "type": "string", "description": "Full display name." },
+        "email": { "type": "string", "description": "Verified Google email." },
+        "role": { "type": "string", "enum": ["admin", "proctor", "student"], "description": "Access role." },
+        "studentId": { "type": "string", "description": "Optional linked student document ID." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp." }
+      },
+      "required": ["userId", "fullName", "email", "role", "createdAt", "updatedAt"]
+    },
+    "RoleAssignment": {
+      "title": "RoleAssignment",
+      "description": "Trusted role marker document for admin or proctor access.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "fullName": { "type": "string" },
+        "grantedByUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "email", "fullName", "grantedByUid", "createdAt"]
+    },
+    "SchoolClass": {
+      "title": "SchoolClass",
+      "description": "Rombongan belajar (kelas VII-IX) SMP Negeri 01 Banding Agung.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Class name such as VII-A, VIII-B, IX-C." },
+        "gradeLevel": { "type": "integer", "description": "Grade level 7, 8, or 9." },
+        "homeroomTeacher": { "type": "string" },
+        "capacity": { "type": "integer" },
+        "published": { "type": "boolean" },
+        "ownerId": { "type": "string" },
+        "staffUids": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "gradeLevel", "homeroomTeacher", "capacity", "published", "ownerId", "staffUids", "createdAt", "updatedAt"]
+    },
+    "Subject": {
+      "title": "Subject",
+      "description": "Mata pelajaran ujian sekolah.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "published": { "type": "boolean" },
+        "ownerId": { "type": "string" },
+        "staffUids": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "name", "published", "ownerId", "staffUids", "createdAt", "updatedAt"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Data peserta didik kelas VII-IX dengan qrToken unik untuk absensi.",
+      "type": "object",
+      "properties": {
+        "nis": { "type": "string" },
+        "fullName": { "type": "string" },
+        "gender": { "type": "string", "enum": ["L", "P"] },
+        "classId": { "type": "string" },
+        "className": { "type": "string" },
+        "qrToken": { "type": "string" },
+        "linkedEmail": { "type": "string" },
+        "authUserId": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "staffUids": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["nis", "fullName", "gender", "classId", "className", "qrToken", "linkedEmail", "authUserId", "ownerId", "staffUids", "createdAt", "updatedAt"]
+    },
+    "ExamSchedule": {
+      "title": "ExamSchedule",
+      "description": "Jadwal pelaksanaan ujian dan rentang waktu aktif absensi QR.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "subjectName": { "type": "string" },
+        "classIds": { "type": "array" },
+        "classNames": { "type": "array" },
+        "startAt": { "type": "string", "format": "date-time" },
+        "endAt": { "type": "string", "format": "date-time" },
+        "durationMinutes": { "type": "integer" },
+        "tokenCode": { "type": "string" },
+        "published": { "type": "boolean" },
+        "ownerId": { "type": "string" },
+        "staffUids": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "subjectId", "subjectName", "classIds", "classNames", "startAt", "endAt", "durationMinutes", "tokenCode", "published", "ownerId", "staffUids", "createdAt", "updatedAt"]
+    },
+    "ExamQuestion": {
+      "title": "ExamQuestion",
+      "description": "Butir soal pilihan ganda (PG) atau esai (ESSAY) untuk suatu ujian.",
+      "type": "object",
+      "properties": {
+        "examId": { "type": "string" },
+        "orderIndex": { "type": "integer" },
+        "questionType": { "type": "string", "enum": ["PG", "ESSAY"] },
+        "prompt": { "type": "string" },
+        "optionA": { "type": "string" },
+        "optionB": { "type": "string" },
+        "optionC": { "type": "string" },
+        "optionD": { "type": "string" },
+        "correctOption": { "type": "string" },
+        "points": { "type": "integer" },
+        "published": { "type": "boolean" },
+        "ownerId": { "type": "string" },
+        "staffUids": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["examId", "orderIndex", "questionType", "prompt", "optionA", "optionB", "optionC", "optionD", "correctOption", "points", "published", "ownerId", "staffUids", "createdAt", "updatedAt"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Catatan absensi QR peserta ujian; ID deterministik {examId}_{studentId} mencegah absensi ganda.",
+      "type": "object",
+      "properties": {
+        "examId": { "type": "string" },
+        "examTitle": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "nis": { "type": "string" },
+        "className": { "type": "string" },
+        "qrToken": { "type": "string" },
+        "studentAuthUid": { "type": "string" },
+        "scannedByUid": { "type": "string" },
+        "scannedByName": { "type": "string" },
+        "status": { "type": "string", "enum": ["present"] },
+        "ownerId": { "type": "string" },
+        "staffUids": { "type": "array" },
+        "scannedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["examId", "examTitle", "studentId", "studentName", "nis", "className", "qrToken", "studentAuthUid", "scannedByUid", "scannedByName", "status", "ownerId", "staffUids", "scannedAt"]
+    },
+    "ExamSubmission": {
+      "title": "ExamSubmission",
+      "description": "Lembar jawaban peserta ujian dengan autosave, skor PG otomatis, dan penilaian esai.",
+      "type": "object",
+      "properties": {
+        "examId": { "type": "string" },
+        "examTitle": { "type": "string" },
+        "subjectName": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "nis": { "type": "string" },
+        "className": { "type": "string" },
+        "studentAuthUid": { "type": "string" },
+        "answers": { "type": "object" },
+        "essayScores": { "type": "object" },
+        "autoScore": { "type": "integer" },
+        "essayScore": { "type": "integer" },
+        "totalScore": { "type": "integer" },
+        "maxScore": { "type": "integer" },
+        "status": { "type": "string", "enum": ["in_progress", "submitted", "graded"] },
+        "ownerId": { "type": "string" },
+        "staffUids": { "type": "array" },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["examId", "examTitle", "subjectName", "studentId", "studentName", "nis", "className", "studentAuthUid", "answers", "essayScores", "autoScore", "essayScore", "totalScore", "maxScore", "status", "ownerId", "staffUids", "startedAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profiles and role mappings."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/RoleAssignment" },
+      "description": "Trusted admin UID registry."
+    },
+    "/proctors/{userId}": {
+      "schema": { "$ref": "#/entities/RoleAssignment" },
+      "description": "Trusted proctor (petugas) UID registry."
+    },
+    "/classes/{classId}": {
+      "schema": { "$ref": "#/entities/SchoolClass" },
+      "description": "School classes (rombel VII-IX)."
+    },
+    "/subjects/{subjectId}": {
+      "schema": { "$ref": "#/entities/Subject" },
+      "description": "Exam subjects (mata pelajaran)."
+    },
+    "/students/{studentId}": {
+      "schema": { "$ref": "#/entities/Student" },
+      "description": "Registered students and QR tokens."
+    },
+    "/exams/{examId}": {
+      "schema": { "$ref": "#/entities/ExamSchedule" },
+      "description": "Exam schedules and time windows."
+    },
+    "/exams/{examId}/questions/{questionId}": {
+      "schema": { "$ref": "#/entities/ExamQuestion" },
+      "description": "Question bank items per exam."
+    },
+    "/attendance/{attendanceId}": {
+      "schema": { "$ref": "#/entities/AttendanceRecord" },
+      "description": "QR attendance logs keyed by {examId}_{studentId}."
+    },
+    "/submissions/{submissionId}": {
+      "schema": { "$ref": "#/entities/ExamSubmission" },
+      "description": "Student exam answers and grades keyed by {examId}_{studentId}."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">E-Ujian SMPN 1</string>
+    <string name="school_full_name">SMP Negeri 01 Banding Agung</string>
+    <string name="school_subtitle">Sistem Ujian Sekolah &amp; Absensi QR</string>
+    <string name="sign_in_google">Masuk dengan Google</string>
+    <string name="sign_in_subtitle">Gunakan akun Google sekolah atau pribadi yang terdaftar untuk mengakses portal Admin, Petugas, atau Peserta Ujian.</string>
+    <string name="sign_out">Keluar</string>
+    <string name="nav_dashboard">Beranda</string>
+    <string name="nav_students">Siswa</string>
+    <string name="nav_exams">Ujian</string>
+    <string name="nav_scanner">Scan QR</string>
+    <string name="nav_portal">Peserta</string>
+    <string name="camera_permission_title">Izin Kamera Diperlukan</string>
+    <string name="camera_permission_rationale">Aktifkan izin kamera untuk memindai kartu QR peserta ujian secara langsung.</string>
+    <string name="grant_camera_permission">Izinkan Kamera</string>
+    <string name="print_report">Cetak / Simpan PDF</string>
+</resources>

@@ -1,0 +1,6 @@
+{
+  "name": "E-Ujian SMPN 1",
+  "description": "Aplikasi E-Ujian dan absensi QR SMP Negeri 01 Banding Agung untuk Admin, Petugas, dan Siswa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
